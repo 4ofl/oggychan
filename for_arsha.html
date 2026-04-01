@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Arsha 💗</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Nunito:wght@400;600;700;800&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<style>
+  :root {
+    --rose: #e8637a;
+    --blush: #f9d0d8;
+    --cream: #fff8f9;
+    --dark: #3a2030;
+    --soft: #f2a7b5;
+    --wolf: #7b6b8d;
+    --gold: #e8c77d;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    background: var(--cream);
+    font-family: 'Nunito', sans-serif;
+    display: flex; justify-content: center; align-items: center;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(232,99,122,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, rgba(123,107,141,0.1) 0%, transparent 60%),
+      radial-gradient(ellipse at 60% 10%, rgba(232,199,125,0.08) 0%, transparent 50%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .floater {
+    position: fixed; font-size: 20px; pointer-events: none;
+    z-index: 0; animation: floatUp linear infinite; opacity: 0;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(105vh) rotate(0deg) scale(0.8); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.4; }
+    100% { transform: translateY(-10vh) rotate(360deg) scale(1.1); opacity: 0; }
+  }
+
+  .card {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(10px);
+    border-radius: 28px;
+    padding: 36px 32px;
+    max-width: 460px; width: 93%;
+    position: relative; z-index: 10;
+    box-shadow: 0 20px 60px rgba(232,99,122,0.15), 0 4px 20px rgba(0,0,0,0.05);
+    border: 1.5px solid rgba(232,99,122,0.15);
+    animation: cardIn 0.7s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: scale(0.85) translateY(30px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .hidden { display: none !important; }
+
+  .question-header { text-align: center; margin-bottom: 24px; }
+  .question-header .emoji-row { font-size: 36px; margin-bottom: 10px; }
+  .question-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; color: var(--dark); line-height: 1.3;
+  }
+  .question-header h1 span { color: var(--rose); font-style: italic; }
+  .subtext { font-size: 13px; color: #a08090; margin-top: 6px; }
+
+  .btn-area {
+    display: flex; justify-content: center; align-items: center;
+    gap: 16px; min-height: 130px; margin-top: 10px; flex-wrap: wrap;
+  }
+
+  .yes-btn {
+    background: linear-gradient(135deg, var(--rose), #c94468);
+    color: white; border: none; border-radius: 50px;
+    padding: 14px 32px; font-size: 18px; font-weight: 800;
+    cursor: pointer; font-family: 'Nunito', sans-serif;
+    box-shadow: 0 6px 20px rgba(232,99,122,0.4);
+    transition: transform 0.15s, box-shadow 0.15s;
+    letter-spacing: 0.5px;
+  }
+  .yes-btn:hover { transform: scale(1.06); box-shadow: 0 10px 28px rgba(232,99,122,0.5); }
+
+  .no-btn {
+    background: white; color: var(--rose);
+    border: 2px solid var(--soft); border-radius: 50px;
+    padding: 12px 26px; font-size: 16px; font-weight: 700;
+    cursor: pointer; font-family: 'Nunito', sans-serif;
+    transition: 0.15s;
+  }
+
+  .gift-header { text-align: center; margin-bottom: 24px; }
+  .gift-header h1 { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--dark); }
+  .gift-header p { color: #a08090; font-size: 14px; margin-top: 6px; }
+
+  .gift-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .gift-item {
+    background: var(--cream);
+    border: 2px solid var(--blush);
+    border-radius: 20px; padding: 18px 8px 12px;
+    cursor: pointer; text-align: center;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    font-family: 'Nunito', sans-serif;
+  }
+  .gift-item:hover {
+    transform: translateY(-4px);
+    border-color: var(--rose);
+    box-shadow: 0 8px 20px rgba(232,99,122,0.15);
+  }
+  .gift-item .g-emoji { font-size: 28px; display: block; margin-bottom: 6px; }
+  .gift-item .g-label { font-size: 10px; font-weight: 800; color: var(--rose); letter-spacing: 0.5px; text-transform: uppercase; }
+
+  .back-btn {
+    background: none; border: 2px solid var(--blush); color: #a08090;
+    border-radius: 30px; padding: 8px 18px; font-size: 13px;
+    font-family: 'Nunito', sans-serif; font-weight: 700;
+    cursor: pointer; margin-top: 22px; transition: 0.2s;
+  }
+  .back-btn:hover { border-color: var(--rose); color: var(--rose); }
+
+  .memo-note {
+    font-family: 'Gaegu', cursive;
+    font-size: 15px; line-height: 1.9;
+    background: repeating-linear-gradient(white, white 27px, #f9d0d8 28px);
+    padding: 14px 18px 14px 42px;
+    position: relative;
+    border: 1.5px solid var(--blush);
+    border-radius: 12px;
+    color: #4a3040;
+    text-align: left;
+    margin-bottom: 16px;
+  }
+
+  .flower-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .flower-btn {
+    background: white; border: 2px solid var(--soft);
+    color: var(--dark); border-radius: 30px;
+    padding: 8px 16px; font-size: 13px; font-weight: 700;
+    cursor: pointer; font-family: 'Nunito', sans-serif; transition: 0.2s;
+  }
+  .flower-btn:hover { border-color: var(--rose); transform: scale(1.05); }
+
+  .grown-flower {
+    position: fixed; font-size: 32px; pointer-events: none; z-index: 50;
+    animation: bloom 0.5s cubic-bezier(0.175,0.885,0.32,1.275) forwards;
+  }
+  @keyframes bloom {
+    from { transform: scale(0) rotate(-20deg); opacity: 0; }
+    to { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+
+  .music-card {
+    background: linear-gradient(135deg, var(--dark) 0%, #5a3050 100%);
+    border-radius: 22px; padding: 28px 24px; color: white; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .music-card::before {
+    content: '🎵';
+    position: absolute; font-size: 120px; opacity: 0.06;
+    top: -20px; right: -20px; transform: rotate(20deg);
+  }
+  .music-card .song-name {
+    font-family: 'Playfair Display', serif; font-size: 22px;
+    font-style: italic; margin-bottom: 6px;
+  }
+  .music-card .artist { font-size: 14px; opacity: 0.7; margin-bottom: 20px; }
+
+  .music-visualizer {
+    display: flex; gap: 4px; justify-content: center;
+    align-items: flex-end; height: 40px; margin-bottom: 20px;
+  }
+  .bar {
+    width: 6px; background: var(--soft); border-radius: 3px;
+    animation: bounce var(--d) ease-in-out infinite alternate;
+  }
+  @keyframes bounce { from { height: 6px; } to { height: var(--h); } }
+  .music-note { font-size: 12px; opacity: 0.6; line-height: 1.6; }
+
+  .letter-wrap {
+    background: white; border-radius: 18px; padding: 28px 24px;
+    text-align: left; border: 1.5px solid var(--blush);
+    box-shadow: 0 4px 20px rgba(232,99,122,0.08);
+    position: relative;
+  }
+  .letter-wrap::before {
+    content: '💌';
+    position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+    font-size: 28px;
+  }
+  .letter-date { font-size: 12px; color: #c0a0b0; margin-bottom: 16px; font-style: italic; }
+  .letter-salutation {
+    font-family: 'Playfair Display', serif; font-size: 20px;
+    color: var(--rose); margin-bottom: 14px; font-style: italic;
+  }
+  .letter-body { font-size: 14px; line-height: 1.85; color: #4a3040; }
+  .letter-body p { margin-bottom: 12px; }
+  .letter-sign {
+    font-family: 'Playfair Display', serif; font-size: 16px;
+    color: var(--wolf); margin-top: 20px; font-style: italic;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: 20px;
+    color: var(--dark); margin-bottom: 16px; text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- PERSISTENT MUSIC PLAYER (hidden) -->
+<div id="music-player" style="position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;overflow:hidden;z-index:-1;">
+  <iframe id="persistent-yt"
+    src="https://www.youtube.com/embed/qTSePMM_UM0?autoplay=1&mute=0&loop=1&playlist=qTSePMM_UM0&rel=0&modestbranding=1&enablejsapi=1"
+    allow="autoplay; encrypted-media"
+    width="1" height="1" frameborder="0">
+  </iframe>
+</div>
+
+<div id="flower-garden"></div>
+
+<!-- QUESTION SECTION -->
+<div id="question-section" class="card">
+  <div class="question-header">
+    <div class="emoji-row">🐱💗🐺</div>
+    <h1>Hey <span>Arsha</span>, do you love me? 🥺</h1>
+    <p class="subtext">think very carefully before answering...</p>
+  </div>
+  <div class="btn-area">
+    <button class="yes-btn" id="yesBtn" onclick="celebrate()">yes obviously 💗</button>
+    <button class="no-btn" id="noBtn" onmouseover="moveNo()" onclick="return false;" ontouchstart="moveNo(); event.preventDefault();">no</button>
+  </div>
+</div>
+
+<!-- GIFT SECTION -->
+<div id="gift-section" class="card hidden">
+  <div class="gift-header">
+    <h1>i KNEW it 😈🎉</h1>
+    <p>checkmate arsha. now open your gifts 🎁</p>
+  </div>
+  <div class="gift-grid">
+    <div class="gift-item" onclick="showContent('memories')">
+      <span class="g-emoji">📸</span>
+      <span class="g-label">hear me out bae</span>
+    </div>
+    <div class="gift-item" onclick="showContent('music')">
+      <span class="g-emoji">🎧</span>
+      <span class="g-label">our song</span>
+    </div>
+    <div class="gift-item" onclick="showContent('letter')">
+      <span class="g-emoji">💌</span>
+      <span class="g-label">a note</span>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT SECTION -->
+<div id="content-section" class="card hidden">
+  <div id="content-body"></div>
+  <div style="text-align:center">
+    <button class="back-btn" onclick="backToGifts()">← back to gifts</button>
+  </div>
+</div>
+
+<script>
+  const noBtn = document.getElementById('noBtn');
+  const yesBtn = document.getElementById('yesBtn');
+
+  const noPhrases = [
+    "no",
+    "wait... are you sure? 🥺",
+    "arsha be serious 😭",
+    "try again bestie 🤡",
+    "okay but ur voice tho...",
+    "u literally talked to me for 1hr+ 💀",
+    "last chance or ill make payal from YOUR trachea 😭",
+    "you love me. say it. NOW. 😈"
+  ];
+  let noCount = 0;
+
+  function moveNo() {
+    const yesRect = yesBtn.getBoundingClientRect();
+    const btnW = noBtn.offsetWidth;
+    const btnH = noBtn.offsetHeight;
+
+    // place near yes button with a small random offset so it looks close but isn't on top
+    const offsets = [
+      { dx: yesRect.width + 12, dy: 0 },
+      { dx: -(btnW + 12), dy: 0 },
+      { dx: 0, dy: yesRect.height + 12 },
+      { dx: 0, dy: -(btnH + 12) },
+      { dx: yesRect.width + 10, dy: yesRect.height + 10 },
+      { dx: -(btnW + 10), dy: -(btnH + 10) },
+    ];
+    const pick = offsets[noCount % offsets.length];
+    let x = yesRect.left + pick.dx;
+    let y = yesRect.top + pick.dy;
+
+    // clamp so it never goes off screen
+    x = Math.min(Math.max(x, 5), window.innerWidth - btnW - 5);
+    y = Math.min(Math.max(y, 5), window.innerHeight - btnH - 5);
+
+    noBtn.style.position = 'fixed';
+    noBtn.style.left = x + 'px';
+    noBtn.style.top = y + 'px';
+    noBtn.style.zIndex = 999;
+    noBtn.innerHTML = noPhrases[noCount % noPhrases.length];
+    noCount++;
+    return false;
+  }
+
+  const floatEmojis = ['❤️','🌹','🌷','🐱','🐺','💗','✨','🌸'];
+  setInterval(() => {
+    const el = document.createElement('div');
+    el.classList.add('floater');
+    el.innerHTML = floatEmojis[Math.floor(Math.random() * floatEmojis.length)];
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.animationDuration = (Math.random() * 4 + 4) + 's';
+    el.style.fontSize = (Math.random() * 14 + 14) + 'px';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 9000);
+  }, 500);
+
+  function celebrate() {
+    confetti({ particleCount: 180, spread: 80, origin: { y: 0.6 }, colors: ['#e8637a','#f9d0d8','#7b6b8d','#e8c77d'] });
+    setTimeout(() => confetti({ particleCount: 80, spread: 100, origin: { y: 0.4 }, shapes: ['circle'] }), 400);
+    document.getElementById('question-section').classList.add('hidden');
+    document.getElementById('gift-section').classList.remove('hidden');
+  }
+
+  function showContent(type) {
+    const body = document.getElementById('content-body');
+    document.getElementById('gift-section').classList.add('hidden');
+    document.getElementById('content-section').classList.remove('hidden');
+
+    if (type === 'memories') {
+      body.innerHTML = `
+        <p class="section-title">hear me out bae 🐱</p>
+        <div style="text-align:center; margin-bottom:20px;">
+          <div style="display:inline-block; background:#fff0f3; border:2px dashed var(--soft); border-radius:16px; padding:18px 28px; transform:rotate(-1.5deg); box-shadow:0 4px 16px rgba(232,99,122,0.12);">
+            <div style="font-size:32px; margin-bottom:6px;">🐱💗🐺</div>
+            <div style="font-size:11px; font-weight:800; color:var(--rose); letter-spacing:1px; text-transform:uppercase;">us fr</div>
+          </div>
+        </div>
+        <div class="memo-note">
+          <span style="position:absolute;left:18px;top:14px;font-size:22px;opacity:0.4;">📝</span>
+          My baby Arsha, i know we don't get to talk ALL day like i want but just know that every single minute with u is my fav minute of the day, i think of you allll the time when we arent together yk. u went from a random suggested account to the girl i love so much. SO glad u werent Anko, if she tried anything now my princess would beat her up ik.i LOVEEEE u so much and since i cant give u flowers irl rn, here's some digital ones bc im your thoughtful baby boy 😤🌹🌷
+        </div>
+        <div class="flower-btns">
+          <button class="flower-btn" onclick="growBouquet('🌹')">rose for u 🌹</button>
+          <button class="flower-btn" onclick="growBouquet('🌷')">tulip for u 🌷</button>
+          <button class="flower-btn" onclick="growBouquet('🐺')">wolf for u 🐺</button>
+        </div>`;
+
+    } else if (type === 'music') {
+      body.innerHTML = `
+        <p class="section-title">our song 🎵</p>
+        <div class="music-card">
+          <div class="song-name">Love Belt</div>
+          <div class="artist">Jonghyun ft. Younha</div>
+          <div class="music-visualizer">
+            ${[28,40,22,36,18,44,30,26,38,20,34,42,16,32,24].map((h,i) => `<div class="bar" style="--h:${h}px;--d:${0.3+i*0.07}s"></div>`).join('')}
+          </div>
+          <div style="background:rgba(255,255,255,0.08);border-radius:12px;padding:14px;margin-top:8px;font-size:13px;color:rgba(255,255,255,0.7);">
+            🎵 now playing in the background for you 💗<br>
+            <span style="font-size:11px;opacity:0.5;">song plays throughout the whole site</span>
+          </div>
+          <p class="music-note" style="margin-top:14px">you're literally my love belt arsha 🐱<br>hold me tight okay 💗</p>
+        </div>`;
+
+    } else if (type === 'letter') {
+      const today = new Date().toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' });
+      body.innerHTML = `
+        <div class="letter-wrap">
+          <p class="letter-date">${today}</p>
+          <p class="letter-salutation">To my Arsha,</p>
+          <div class="letter-body">
+            <p>You told me your name was Arsha and that you were from Mumbai. Turns out, everything was different the name, the city, probably even the vibe you were going for But somehow, you ended up being exactly what I wasn't looking for but really needed. I just wanted to make new friends, on a new account, didnt know i was gonna find the love of my life :Sob:</p>
+            <p>I still call you Arsha not because i dont like your real name, Firdous &lt;3 but because that's the name I fell for first  and honestly it suits you in a way only I get to know so gonna have to say secret here :tongue:</p>
+            <p>I love that we're both a little too jealous, a little too much, and somehow perfectly matched in our chaos. You're technically dom but I still get to baby you and that's my win which im not ever sharing with ANYONE.</p>
+            <p>I love your voice more than you know tho i mention it so many times udk fr. Like it's genuinely unfair how soft and warm it is  that first vc we talked for over an hour and I didn't even notice the time passing. That says everything. (mb for your bangles tho baby)</p>
+            <p>We're both turning almost-18 within a week of each other. September 1st and 7th. That can't be a coincidence yk That's literally the universe being dramatic on our behalf 🌙</p>
+            <p>I love you. I know you love me too because you clicked YES and that's legally binding now. 😈</p>
+          </div>
+          <p class="letter-sign">— yours (and very obsessed, Aarush) 🐺💗</p>
+        </div>`;
+    }
+  }
+
+  function growBouquet(emoji) {
+    confetti({ particleCount: 30, spread: 70, origin: { y: 0.7 } });
+    for (let i = 0; i < 7; i++) {
+      setTimeout(() => {
+        const f = document.createElement('div');
+        f.classList.add('grown-flower');
+        f.innerHTML = emoji;
+        f.style.left = Math.random() * 90 + 'vw';
+        f.style.top = Math.random() * 85 + 'vh';
+        document.getElementById('flower-garden').appendChild(f);
+        setTimeout(() => f.remove(), 3000);
+      }, i * 80);
+    }
+  }
+
+  function backToGifts() {
+    document.getElementById('content-section').classList.add('hidden');
+    document.getElementById('gift-section').classList.remove('hidden');
+  }
+</script>
+</body>
+</html>
