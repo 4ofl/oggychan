@@ -219,13 +219,9 @@
 <body>
 
 <!-- PERSISTENT MUSIC PLAYER (hidden) -->
-<div id="music-player" style="position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;overflow:hidden;z-index:-1;">
-  <iframe id="persistent-yt"
-    src=""
-    allow="autoplay; encrypted-media"
-    width="1" height="1" frameborder="0">
-  </iframe>
-</div>
+<audio id="bg-music" loop>
+  <source src="love-belt.mp3" type="audio/mpeg">
+</audio>
 
 <div id="flower-garden"></div>
 
@@ -332,7 +328,10 @@
   }, 500);
 
   function celebrate() {
-    document.getElementById('persistent-yt').src = "https://www.youtube.com/embed/qTSePMM_UM0?autoplay=1&mute=0&loop=1&playlist=qTSePMM_UM0&rel=0&modestbranding=1&enablejsapi=1";
+    const music = document.getElementById('bg-music');
+    music.play().catch(error => {
+      console.log("Browser blocked autoplay, but it should work since she clicked a button!", error);
+    });
     confetti({ particleCount: 180, spread: 80, origin: { y: 0.6 }, colors: ['#e8637a','#f9d0d8','#7b6b8d','#e8c77d'] });
     setTimeout(() => confetti({ particleCount: 80, spread: 100, origin: { y: 0.4 }, shapes: ['circle'] }), 400);
     document.getElementById('question-section').classList.add('hidden');
